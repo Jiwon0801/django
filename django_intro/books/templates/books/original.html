@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>MAMAGO</h1>
+    <form action="/books/translated/">
+        <input type="text" name="text">
+        <input type="submit" value="translate">
+    </form>
+{% endblock %}

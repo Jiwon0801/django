@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h3>1. 반복문</h3>
+    {% for menu in menus %}
+        <p>{{ menu }} </p>
+    {% endfor %}
+    <hr>
+    {%for menu in menus%}
+        <p>{{ forloop.counter }} {{ menu }}</p>
+    {% endfor %}
+    <hr>
+    {%for user in empty_list %}
+        <p>{{ user }}</p>
+    {% empty %}
+        <p>가입한 유저가 없습니다.</p>
+    {% endfor %}
+    <hr>
+    <h3>3. length filter</h3>
+    {% for message in messages%}
+        {% if message|length > 5 %}
+            <p>글씨가 너무 길어요</p>
+        {% else %}
+        <p>{{ message }}, {{message|length}} </p>
+        {% endif %}
+     {% endfor %}
+    <hr>
+    <h3>4. lorem ipsum</h3>
+    {% lorem %}
+    <hr>
+    {% lorem 3 w %}
+    <hr>
+    {% lorem random %}
+    <hr>
+    {% lorem 2 p %}
+    <hr>
+    <h3>5. 글자수 제안</h3>
+    <p>{{ my_sentence|truncatewords:3 }}</p>
+    <p>{{ my_sentence|truncatechars:3 }}</p>
+    <p>{{ my_sentence|truncatechars:10 }}</p>
+    <!--    ... :1 char-->
+    <hr>
+    <h3>6. 글자 관련 필터</h3>
+    <p>{{ 'abc'|length }}</p>
+    <p>{{ 'ABC'|lower }}</p>
+    <p>{{ my_sentence|title}</p>
+    <p>{{ 'abc def' | capfirst }}</p>
+    <p>{{ menus|random }}</p>
+    <hr>
+
+    <h3>7. 연산</h3>
+    <p>{{ 4|add:6}}</p>
+
+    <h3>8. 날짜 표현</h3>
+    {{ datetimenow }} <br>
+    {% now 'DATETIME_FORMAT' %} <br>
+    {% now 'SHORT_DATETIME_FORMAT' %} <br>
+    {% now 'DATE_FORMAT' %} <br>
+    {% now 'SHORT_DATE_FORMAT' %}
+    {% now "Y" as current_year%}
+    Copyright {{ current_year }}
+
+    <h3>9. 기타</h3>
+    {{ 'google.com'|urlize }}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>아스키 코드로 변환</h1>
+    <form action="/books/ascii_make/">
+        <input type="text" name="text">
+        <select name="font">
+            {% for font in fonts %}
+            <option value="{{ font }}">{{ font }} </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="만들기">
+    </form> <br>
+    <a href = "/books/"> back </a>
+{% endblock %}
