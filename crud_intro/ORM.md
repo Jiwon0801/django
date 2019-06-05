@@ -307,7 +307,7 @@ admin.site.register(Board)
 
 
 
-#### UPDATE, DELETE
+### UPDATE, DELETE
 
 - __특정한 하나의 값에 대해 동작__
 
@@ -322,3 +322,16 @@ board = Board(title='second', content='djngo!!')
 board.save() #DB에 값 쓰기
 board # 값 확인
 ```
+
+
+
+
+
+### Variable Routing
+
+```python
+path('<int:pk>/', views.detail)
+```
+
+
+
