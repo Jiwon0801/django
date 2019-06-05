@@ -10,3 +10,6 @@ class Board(models.Model):
     # auto_now : 수정일자 / db가 새로 저장될 때마다 갱신
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.id}글 - {self.title}: {self.content}'
