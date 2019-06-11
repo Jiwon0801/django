@@ -8,7 +8,16 @@
     <p>내용: {{ board.content}}</p>
     <p>작성 시각: {{ board.created_at }}</p>
     <p>수정 시각: {{ board.updated_at }}</p>
-    <a href="/boards/">메인페이지로</a>
+    <hr>
+    <a href="{% url 'boards:update' board.pk %}">[수정]</a> <br>
+    <form action="{% url 'boards:delete' board.pk%}" method="POST" style="display: inline" onsubmit="return confirm('R U SURE?')">
+        {% csrf_token%}
+        <input type="submit" value="삭제">
+    </form>
+<br>
+<!--    <a href="{% url 'boards:delete' board.pk %}" onclick="return confirm('R U SURE?')">[삭제]</a> <br>-->
+    <a href="{% url 'boards:index' %}">메인페이지로</a>
+
 {% endblock %}
 
 

@@ -1,0 +1,37 @@
+{% extends 'movies/base.html' %}
+{% block content %}
+<h1>CREATE</h1>
+<form action="{% url 'movies:create' %}" method="post">
+  {% csrf_token %}
+  <label for="title">TITLE</label>
+  <input type="text" name="title" id="title"><br>
+
+  <label for="title_en">title_en</label>
+  <input type="text" name="title_en" id="title_en"><br>
+
+  <label for="audience">audience</label>
+  <input type="number" name="audience" id="audience"><br>
+
+  <label for="open_date">open_date</label>
+  <input type="date" name="open_date" id="open_date"><br>
+
+  <label for="genre">genre</label>
+  <input type="text" name="genre" id="genre"><br>
+
+  <label for="watch_grade">watch_grade</label>
+  <input type="text" name="watch_grade" id="watch_grade"><br>
+
+  <label for="title">score</label>
+  <input type="number" name="score" max="5" min="0" step="0.5"><br>
+
+  <label for="poster_url">poster_url</label>
+  <input type="text" name="poster_url" id="poster_url"><br>
+
+  <label for="description">description</label>
+  <textarea name="description" id="description"></textarea><br>
+
+  <input type="submit" value="등록">
+</form>
+<a href="{% url 'movies:index' %}">back</a>
+{% endblock %}
+

@@ -38,8 +38,6 @@ USE_TZ = False
 ## .gitignore
 https://www.gitignore.io/
 django, pycharm
-
-
 ```
 
 
@@ -58,6 +56,8 @@ django, pycharm
 
 - app 등록:  __settings.py__
 
+  
+  
   - ```python
     # 폴더이름\settings.py
     INSTALLED_APPS = [
@@ -65,6 +65,7 @@ django, pycharm
         'books.apps.BooksConfig',
         'pages.apps.PagesConfig',
         #third party apps
+        'django_extensions',
         #django apps
         'django.contrib.admin',
         'django.contrib.auth',
