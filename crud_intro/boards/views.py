@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Board
+from .models import Board, Comment
 from IPython import embed
 
 
@@ -44,16 +44,18 @@ def create(request):
     # }
 
 
-
-def detail(request, pk):
+def detail(request, board_pk):
     #요청으로 들어온 pk 값으로 해당 글을 찾아옴
-    board = Board.objects.get(pk=pk)
-    context = {'board': board}
+    board = Board.objects.get(pk=board_pk)
+    #현재 게시글이 가지고 있는 모든 댓글
+    # comments = board.comment_set.all()
+    comments = board.comment_set.order_by('-pk')
+    context = {'board': board, 'comments': comments}
     return render(request, 'boards/detail.html', context)
 
 
-def delete(request, pk):
-    board = Board.objects.get(pk=pk)
+def delete(request, board_pk):
+    board = Board.objects.get(pk=board_pk)
     if request.method == 'POST':
         board.delete()
         # return redirect('/boards/')
@@ -69,9 +71,9 @@ def delete(request, pk):
 #     return render(request, 'boards/update.html', context)
 
 
-def update(request, pk):
+def update(request, board_pk):
     #UPDATE
-    board = Board.objects.get(pk=pk)
+    board = Board.objects.get(pk=board_pk)
     if request.method == 'POST':
         board.title = request.POST.get('title')
         board.content = request.POST.get('content')
@@ -84,3 +86,25 @@ def update(request, pk):
 
     # return redirect(f'/boards/{board.pk}/')
 
+
+def comments_create(request, board_pk):
+    # 댓글 달 게시물
+    board = Board.objects.get(pk=board_pk)
+    if request.method == "POST":
+        # submit에서 넘어온 댓글 정보
+        content = request.POST.get('content')
+        # 댓글 생성 및 저장
+        comment = Comment(board=board, content=content)
+        comment.save()
+        return redirect('boards:detail', board.pk)
+    else:
+        return redirect('boards:detail', board.pk)
+
+
+def comments_delete(request, board_pk, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    if request.method == "POST":
+        comment.delete()
+    return redirect('boards:detail', board_pk)
+    # else:
+    #     return redirect('boards:detail', board_pk)
