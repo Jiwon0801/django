@@ -1,0 +1,18 @@
+{% extends 'movies/base.html' %}
+{% block content %}
+<h1>INDEX</h1>
+<a href="{% url 'movies:create' %}">새영화등록하기</a>
+{% for movie in movies %}
+  <div class="card mx-auto" style="width: 50vw;">
+    <img src="{{ movie.poster_url }}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{ movie.title }}</h5>
+      <h6 class="card-title">{{ movie.title_en }}</h6>
+      <hr>
+      <p class="card-text">{{ movie.description }}</p>
+      <a href="{% url 'movies:detail' movie.pk %}" class="btn btn-primary">Go Movie</a>
+    </div>
+  </div>
+  <hr>
+{% endfor %}
+{% endblock %}
