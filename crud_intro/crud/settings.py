@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'boards.apps.BoardsConfig',
+    'imagekit',
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -120,5 +121,10 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
 STATIC_URL = '/static/'
+
+#static 파일의 업로드가 끝나면 파일이 어디에 저장되게 할지를 설정하는 경로
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# 업로드된 파일을 주소(url)를 만들어 줌. 실제 이미지 파일의 업로드된 디렉토리를 의미하는 것은 아님
+MEDIA_URL = '/media/'
+

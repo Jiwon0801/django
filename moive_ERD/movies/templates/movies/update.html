@@ -1,0 +1,39 @@
+{% extends 'movies/base.html' %}
+{% block content %}
+	<h1 class="text-center">영화 정보 수정</h1>
+	<hr>
+	<form method="POST">
+		{% csrf_token %}
+		<div class="form-group">
+			<label for="title">TITLE</label>
+			<input type="text" class="form-control" id="title" name="title" value="{{movie.title}}">
+		</div>
+		<div class="form-group">
+			<label for="audience">AUDIENCE</label>
+			<input type="number" class="form-control" id="audience" name="audience" value="{{movie.audience}}">
+  	</div>
+		<div class="form-group">
+			<label for="poster_url">POSTER_URL</label>
+			<textarea class="form-control" id="poster_url" name="poster_url" rows="3">{{movie.poster_url}}</textarea>
+  	</div>
+		<div class="form-group">
+			<label for="description">DISCRIPTION</label>
+			<textarea class="form-control" id="description" name="description" rows="3">{{movie.description}}</textarea>
+  	</div>
+		<div class="form-group">
+			<label for="genre">GENRE</label>
+			<select class="form-control" name="genre" id="genre">
+				{% for genre in genres %}
+					{% if genre.pk == movie.genre.pk %}
+						<option value="{{genre.pk}}" selected>{{genre.name}}</option>
+					{% else %}
+						<option value="{{genre.pk}}">{{genre.name}}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+		</div>
+		<input type="reset" value="취소" class="btn btn-info">
+		<input type="submit" value="수정" class="btn btn-success">
+	</form><br>
+	<a href="{% url 'movies:detail' movie.pk %}" class="btn btn-primary" role="button">뒤로</a>
+{% endblock  %}

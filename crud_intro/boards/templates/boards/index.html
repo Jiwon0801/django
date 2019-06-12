@@ -1,17 +1,17 @@
-{% extends 'boards/base.html'%}
+{% extends 'boards/base.html' %}
+{% load static %}
 
 {% block content %}
-    <h1> INDEX </h1>
-    <a href="{% url 'boards:create' %}">글작성</a>
+  <h1>BOARD</h1>
+  <img src="{% static 'boards/images/sample_img.jpg' %}" alt="sample_img">
+  <a href="{% url 'boards:create' %}">글 작성</a>
+  <hr>
+  {% for board in boards %}
+    <p>{{ board.pk }}</p>
+    <p>{{ board.title }}</p>
+    <p>{{ board.created_at|timesince }} 전</p>
+    <a href="{% url 'boards:detail' board.pk %}">글 보러가기</a>
     <hr>
-     {% for board in boards %}
-        <p>{{ board.title }}</p>
-        <p>{{ board.created_at|timesince}}전</p>
-        <p>{{ board.pk }}</p>
-        <a href="{% url 'boards:detail' board.pk %}">글 보러가기</a>
-        <hr>
-     {% endfor %}
-
+  {% endfor %}
 {% endblock %}
-
 
